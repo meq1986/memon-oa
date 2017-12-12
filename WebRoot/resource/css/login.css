@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+    background: url(../img/background.jpg);
+	background-color: #444;  
+}
+
+.vertical-offset-100{
+    padding-top:100px;
+}
