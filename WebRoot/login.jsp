@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    	<h3 class="panel-title">请登录</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form">
+			    	<form accept-charset="UTF-8" role="form" action="servlet/LoginServlet" method="POST">
                     <fieldset>
 			    	  	<div class="form-group">
 			    		    <input class="form-control" placeholder="帐户名 邮箱" name="email" type="text">
