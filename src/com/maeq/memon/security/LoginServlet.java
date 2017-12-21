@@ -2,6 +2,11 @@ package com.maeq.memon.security;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -91,6 +96,8 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
+		boolean ok = isConnect();
+		
 		LOGGER.info("email = " + email + ",password = " + password);
 		System.out.println("email = " + email);
 		System.out.println("password = " + password);
@@ -111,7 +118,7 @@ public class LoginServlet extends HttpServlet {
 		out.println("  <BODY>");
 		out.print("    This is ");
 		out.print(this.getClass());
-		out.println(", using the POST method. login is " + flag);
+		out.println(", using the POST method. login is " + flag + ", ok = " + ok);
 		out.println("  </BODY>");
 		out.println("</HTML>");
 		out.flush();
@@ -127,4 +134,45 @@ public class LoginServlet extends HttpServlet {
 		// Put your code here
 	}
 
+	private boolean isConnect()
+	{
+		boolean ok = false;
+		
+		String url = "jdbc:mysql://localhost:3306/memonoa";
+		String user = "root";
+		String password = "Temp@Win2015";
+		
+		Connection conn = null;
+		Statement statement = null;
+		ResultSet result = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			conn = DriverManager.getConnection(url,user,password);
+			
+			if(!conn.isClosed()){
+				ok = true;
+			}
+			
+			statement = conn.createStatement();
+			result = statement.executeQuery("SELECT * FROM T_USER");
+			if(!result.wasNull())
+			{
+				ok = true;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ok;
+	}
+	
 }
