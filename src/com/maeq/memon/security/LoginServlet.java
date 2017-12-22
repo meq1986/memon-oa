@@ -15,9 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.maeq.memon.dao.UserDao;
+
 public class LoginServlet extends HttpServlet {
 	
 	private static final Logger LOGGER = Logger.getLogger(LoginServlet.class);
+	
+	private static UserDao userdao = new UserDao();
 	
 	/**
 	 * Constructor of the object.
@@ -96,18 +100,32 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		boolean ok = isConnect();
+		//boolean ok = isConnect();
 		
 		LOGGER.info("email = " + email + ",password = " + password);
 		System.out.println("email = " + email);
 		System.out.println("password = " + password);
 		
+		String db_pass = "";
+		try {
+			db_pass = userdao.getPassByName(email);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("db_pass = " + db_pass);
+		
 		String flag = "SUCCESS";
 		
-		if(!email.equals("admin") || !password.equals("admin"))
+		if(!password.equals(db_pass))
 		{
 			flag = "FAIL";
 		}
+		
+/*		if(!email.equals("admin") || !password.equals("admin"))
+		{
+			flag = "FAIL";
+		}*/
 		
 		
 		response.setContentType("text/html");
@@ -118,7 +136,7 @@ public class LoginServlet extends HttpServlet {
 		out.println("  <BODY>");
 		out.print("    This is ");
 		out.print(this.getClass());
-		out.println(", using the POST method. login is " + flag + ", ok = " + ok);
+		out.println(", using the POST method. login is " + flag );
 		out.println("  </BODY>");
 		out.println("</HTML>");
 		out.flush();
