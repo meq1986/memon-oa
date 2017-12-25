@@ -128,7 +128,13 @@ public class LoginServlet extends HttpServlet {
 		}*/
 		
 		
-		response.setContentType("text/html");
+		if(flag.equals("SUCCESS")){
+			System.out.println("flag.equals(SUCCESS)");
+			response.sendRedirect("/memon-oa/production/index.html");
+			return;
+		}
+		
+/*		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 		out.println("<HTML>");
@@ -140,7 +146,7 @@ public class LoginServlet extends HttpServlet {
 		out.println("  </BODY>");
 		out.println("</HTML>");
 		out.flush();
-		out.close();
+		out.close();*/
 	}
 
 	/**
