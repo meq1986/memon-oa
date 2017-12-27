@@ -18,7 +18,7 @@ import com.maeq.memon.utils.DBConn;
 public class UserDao {
 	private Connection conn;
 	
-	public String getPassByName(String username) throws SQLException{
+	public String getPassByName(String username) throws SQLException, ClassNotFoundException{
 		String password = "";
 		Statement statement = null;
 		ResultSet result = null;
@@ -28,7 +28,7 @@ public class UserDao {
 		String sql = "select password from t_user where username = '" + username +"'";
 		result = statement.executeQuery(sql);
 		
-		while(result.next())
+		if(result.next())
 		{
 			password = result.getString(1);
 		}
@@ -40,6 +40,7 @@ public class UserDao {
 	
 	public int insertUser(String username,String password) throws SQLException, ClassNotFoundException
 	{
+		// 自定义异常 比如 用户名 密码为空 用户名重复等
 		Connection con = null;
         PreparedStatement ps = null;
         try {
@@ -56,7 +57,7 @@ public class UserDao {
         return -1;
 	}
 	
-	public int updateUserById(int id,String username,String password) throws SQLException
+	public int updateUserById(int id,String username,String password) throws SQLException, ClassNotFoundException
 	{
 		Connection con = null;
         PreparedStatement ps = null;
@@ -75,7 +76,7 @@ public class UserDao {
         return -1;
 	}
 	
-	public int deleteUserById(int id) throws SQLException{
+	public int deleteUserById(int id) throws SQLException, ClassNotFoundException{
 		Connection con = null;
         PreparedStatement ps = null;
         try {
@@ -94,8 +95,9 @@ public class UserDao {
 	/**
 	 * @param args
 	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		UserDao userdao = new UserDao();
 		String password = userdao.getPassByName("maeq");
 		

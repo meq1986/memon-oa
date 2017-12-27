@@ -109,7 +109,7 @@ public class LoginServlet extends HttpServlet {
 		String db_pass = "";
 		try {
 			db_pass = userdao.getPassByName(email);
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
