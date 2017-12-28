@@ -1,4 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -346,7 +349,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+<!--                         <tr>
                           <td>Tiger</td>
                           <td>Nixon</td>
                           <td>System Architect</td>
@@ -354,31 +357,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                           <td>61</td>
                           <td>2011/04/25</td>
                           <td>$320,800</td>
-<!--                           <td>5421</td>
-                          <td>t.nixon@datatables.net</td> -->
-                        </tr>
+                          <td>5421</td>
+                          <td>t.nixon@datatables.net</td>
+                        </tr> -->
+                        
+                        <c:forEach items="${userlist}" var="user">
                         <tr>
-                          <td>Garrett</td>
-                          <td>Winters</td>
-                          <td>Accountant</td>
-                          <td>Tokyo</td>
-                          <td>63</td>
-                          <td>2011/07/25</td>
-                          <td>$170,750</td>
-<!--                           <td>8422</td>
-                          <td>g.winters@datatables.net</td> -->
+                          <td>${user.id}</td>
+                          <td>${user.username}</td>
+                          <td>${user.password}</td>
+                          <td>${user.email}</td>
+                          <td>${user.mobilephone}</td>
+                          <td>${user.createdate}</td>
+                          <td>${user.status}</td>
                         </tr>
-                        <tr>
-                          <td>Ashton</td>
-                          <td>Cox</td>
-                          <td>Junior Technical Author</td>
-                          <td>San Francisco</td>
-                          <td>66</td>
-                          <td>2009/01/12</td>
-                          <td>$86,000</td>
-<!--                           <td>1562</td>
-                          <td>a.cox@datatables.net</td> -->
-                        </tr>
+                        </c:forEach>
+                        
                       </tbody>
                     </table>
 					
