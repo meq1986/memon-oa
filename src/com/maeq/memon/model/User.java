@@ -17,16 +17,26 @@ public class User {
 	private int status;
 	
 	
+
 	/**
 	 * @param id
 	 * @param username
 	 * @param password
+	 * @param email
+	 * @param mobilephone
+	 * @param createdate
+	 * @param status
 	 */
-	public User(int id, String username, String password) {
+	public User(int id, String username, String password, String email,
+			String mobilephone, String createdate, int status) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.email = email;
+		this.mobilephone = mobilephone;
+		this.createdate = createdate;
+		this.status = status;
 	}
 	/**
 	 * @return the id
@@ -111,6 +121,16 @@ public class User {
 	 */
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password="
+				+ password + ", email=" + email + ", mobilephone="
+				+ mobilephone + ", createdate=" + createdate + ", status="
+				+ status + "]";
 	}
 	
 	

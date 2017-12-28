@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import com.maeq.memon.model.User;
 import com.maeq.memon.utils.DBConn;
 
 /**
@@ -92,6 +94,34 @@ public class UserDao {
         return -1;
 	}
 	
+	// 类型选取ArrayList，不是LinkList
+	// 因为这里取数据，主要在于展示，没有插入，删除操作
+	// 获取全部用户  慎用 数据量级大的时候 会影响性能
+	public ArrayList<User> getAllUser() throws ClassNotFoundException, SQLException{
+		ArrayList<User> res = new ArrayList<User>();
+		
+		Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBConn.getConnection();
+            ps = con.prepareStatement("select * from t_user");
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+            	res.add(new User(rs.getInt("id"),rs.getString("username"),
+            			rs.getString("password"),rs.getString("email"),
+            			rs.getString("mobilephone"),rs.getString("createdate"),
+            			rs.getInt("status")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	DBConn.closeConnection();
+        }
+        return res;
+	}
+	
 	/**
 	 * @param args
 	 * @throws SQLException 
@@ -99,20 +129,13 @@ public class UserDao {
 	 */
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		UserDao userdao = new UserDao();
-		String password = userdao.getPassByName("maeq");
 		
-		try {
-			userdao.insertUser("hahaha", "12323123");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		ArrayList<User> all = userdao.getAllUser();
+		
+		for(User u : all)
+		{
+			System.out.println(u.toString());
 		}
-		
-		userdao.updateUserById(4, "car", "wawa");
-		
-		userdao.deleteUserById(6);
-		
-		System.out.println(password);
 
 	}
 
