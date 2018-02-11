@@ -40,16 +40,20 @@ public class UserDao {
 		return password;
 	}
 	
-	public int insertUser(String username,String password) throws SQLException, ClassNotFoundException
+	public int insertUser(String username,String password,String email, String mobilephone, String createdate, int status) throws SQLException, ClassNotFoundException
 	{
 		// 自定义异常 比如 用户名 密码为空 用户名重复等
 		Connection con = null;
         PreparedStatement ps = null;
         try {
             con = DBConn.getConnection();
-            ps = con.prepareStatement("insert into t_user (username,password) values (?,?)");
+            ps = con.prepareStatement("insert into t_user (username,password,email,mobilephone,createdate,status) values (?,?,?,?,?,?)");
             ps.setString(1, username);
             ps.setString(2, password);
+            ps.setString(3, email);
+            ps.setString(4, mobilephone);
+            ps.setString(5, createdate);
+            ps.setInt(6, status);
             return ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

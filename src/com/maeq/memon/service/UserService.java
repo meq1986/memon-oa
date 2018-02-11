@@ -21,6 +21,15 @@ public class UserService {
 		return userdao.getAllUser();
 	}
 	
+	public int insertUser(String username,
+			String password,
+			String email, 
+			String mobilephone, 
+			String createdate, 
+			int status) throws SQLException, ClassNotFoundException{
+		return userdao.insertUser(username, password, email, mobilephone, createdate, status);
+	}
+	
 	/**
 	 * @param args
 	 * @throws SQLException 
