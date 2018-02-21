@@ -14,6 +14,11 @@
     <servlet-name>GetAllUserServlet</servlet-name>
     <servlet-class>com.maeq.memon.servlet.GetAllUserServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AddUserServlet</servlet-name>
+    <servlet-class>com.maeq.memon.servlet.AddUserServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -28,6 +33,10 @@
   <servlet-mapping>
     <servlet-name>GetAllUserServlet</servlet-name>
     <url-pattern>/servlet/GetAllUserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddUserServlet</servlet-name>
+    <url-pattern>/servlet/AddUserServlet</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
