@@ -27,6 +27,13 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> UserMgr <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="../admin/userlist.jsp">UserList</a></li>
+                      <li><a href="../admin/adduser.jsp">AddUser</a></li>
+                      <li><a href="index3.html">etc</a></li>
+                    </ul>
+                  </li>
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="index.html">Dashboard</a></li>
